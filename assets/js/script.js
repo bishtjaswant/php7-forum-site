@@ -11,7 +11,7 @@ $(function () {
     let password = $("#password").val()
     let address = $("#address").val()
     let phone = $("#phone").val();
-    let gender = $("input[name='gender']").val();
+    let gender = document.querySelector("input[name=gender]:checked").value;
       
     let userdata={
         first,
