@@ -1,5 +1,9 @@
 $(function () { 
-
+// tooltip
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  
     
 // signup implementation
     $("#sign-form").on('submit', function (e) {  

@@ -19,9 +19,8 @@
     $noResult=true;
     if ( $stmt->rowCount()>0 ) {
       $noResult=false;
-      
       $thread_row = $stmt->fetch();
-      print_r($thread_row);
+    
     }
     ?>
 
