@@ -3,7 +3,6 @@
 require_once '../../db/db.php';
 require_once '../utility/emailAvailability.php';
 
-
 $data = [
     "first" => $_POST['first'],
     "last" => $_POST['last'],
@@ -16,7 +15,7 @@ $data = [
 
 // echo emailAvailability($pdo, $data['email']);die;
 if (emailAvailability($pdo, $data['email']) === -1) {
-    $sql = "INSERT INTO `users`( `firstname`, `lastname`, `email`, `password`, `address`, `phone`, `gender`) VALUES (:first,:last,:email,:password,:address,:phone,:gender)";
+    $sql = 'INSERT INTO `users`( `firstname`, `lastname`, `email`, `password`, `address`, `phone`, `gender`) VALUES (:first,:last,:email,:password,:address,:phone,:gender)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute($data);
 

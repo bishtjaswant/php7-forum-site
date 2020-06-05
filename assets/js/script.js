@@ -1,10 +1,9 @@
 $(function () { 
 
     
-// signup impleantation
+// signup implementation
     $("#sign-form").on('submit', function (e) {  
         e.preventDefault();
-    console.log('ok');
 
     let first = $("#first").val()
     let last = $("#last").val()
@@ -22,9 +21,8 @@ $(function () {
         address,
         phone,
         gender
-    }
-
-    // console.log(data);
+    } 
+ 
     $.ajax({
         url: "http://localhost/php-online-forum-project/data/users/register.php",
         method: "POST",

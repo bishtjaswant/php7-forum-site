@@ -12,11 +12,11 @@
         <form id="login-frm">
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" id="email" required  placeholder="email address" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="email" id="login_email" required  placeholder="email address" class="form-control" id="email" aria-describedby="emailHelp">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" required placeholder="***************" class="form-control" id="password">
+            <input type="password" id="login_password" required placeholder="***************" class="form-control" id="password">
           </div>
 
           <button type="submit" class="btn btn-outline-primary">Login</button>

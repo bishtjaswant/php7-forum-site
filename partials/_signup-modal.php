@@ -48,14 +48,16 @@
                         <div class="col-md-6">
                             <label for="gender">Gender</label>
                             <div class="form-group form-inline">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="male" value="male" name="gender" class="custom-control-input" checked="">
-                                    <label class="custom-control-label" for="male">Male</label>
-                                </div>
-                                <div class="custom-control custom-radio">
+
+                            <div class="custom-control custom-radio">
                                     <input type="radio"  value="female" id="female" name="gender" class="custom-control-input">
                                     <label class="custom-control-label" for="female">Female</label>
                                 </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="male" value="male" name="gender" class="custom-control-input" >
+                                    <label class="custom-control-label" for="male">Male</label>
+                                </div>
+                               
 
                             </div>
 
