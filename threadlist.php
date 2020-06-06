@@ -26,7 +26,7 @@ $showAlert=true;
 }
 ?>
 
-
+<!-- shhow alert message when question will  be added to db -->
 <?php if($showAlert):?>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Great!</strong> Your question  added
