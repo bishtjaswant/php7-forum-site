@@ -10,10 +10,21 @@
 <?php require_once './db/db.php';    ?>
 
 
+<!-- update user's comment -->
+<?php
 
+
+
+$sql = "UPDATE `comments` SET `comment_title`=:comment_title WHERE `comments`.`comment_id`=:comment_id ";
+
+$pdo->prepare($sql)->execute([
+  ':comment_title'=>$_POST['new_comment'],
+  ':comment_id'=> $_POST['comment_id'] 
+]);
+?>
 
 <!-- POST New commnts-->
-<?php
+<?php 
 $showAlert=false;
 if($_SERVER['REQUEST_METHOD']==='POST'){
 
@@ -113,7 +124,7 @@ $showAlert=true;
           <img src="assets/img/defaultuser.png" style="width: 64px;height: 64px;object-fit: cover;" class="mr-3 img-fruid" alt="...">
           <div class="media-body">
             <p class="font-weight-bold  py-0 my-0">Anonymous</p>
-            <div> <?= $comment['comment_title']; ?>     </div>
+            <p style="display: inline-block;" id="comment_again" data-toggle="tooltip" data-placement="top" title="want to edit commets" data-commentid="<?= $comment['comment_id']; ?> "> <?= $comment['comment_title']; ?>     </p>
           </div>
         </li>
       </ul>
