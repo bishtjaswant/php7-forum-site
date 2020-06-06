@@ -18,8 +18,8 @@
 $sql = "UPDATE `comments` SET `comment_title`=:comment_title WHERE `comments`.`comment_id`=:comment_id ";
 
 $pdo->prepare($sql)->execute([
-  ':comment_title'=>$_POST['new_comment'],
-  ':comment_id'=> $_POST['comment_id'] 
+  ':comment_title'=>@$_POST['new_comment'],
+  ':comment_id'=> @$_POST['comment_id'] 
 ]);
 ?>
 
