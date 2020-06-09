@@ -50,29 +50,31 @@ $(function () {
 
     });
 
+    
+    
     // login implementation
     $("#login-frm").on("submit", function (e) {
         e.preventDefault();
-        let email = $("#email").val();
-        let password = $("#password").val();
-        let userlogin = { email, password };
-
+        let email = $("#login_email").val();
+        let password = $("#login_password").val();
+        let userLoginData = {email,password};
+        
         $.ajax({
             url: "http://localhost/php-online-forum-project/data/users/login.php",
             method: "POST",
-            data: userlogin,
+            data: userLoginData,
             cache: false,
             dataType: "json",
             success: function (data) {
-                console.log(data.msg);
+                console.log(data);
                 if (data.status) {
-                    $("#modal-footer").html(`<hr/><p class="text-success text-left">${data.msg.toUpperCase()}</p>`);
-                    $("#sign-form")[0].reset();
+                    $("#login-modal-footer").html(`<hr/><p class="alert alert-danger">${data.message.toUpperCase()}</p>`);
+                    $("#login-frm")[0].reset();
                     setTimeout(() => {
-                        $("#modal-footer").html('');
+                        $("#login-modal-footer").html('');
                     }, 2000);
                 } else {
-                    $("#modal-footer").html(`<span class="text-danger">${data.msg}</>`);
+                    $("#login-modal-footer").html(`<p class="alert alert-danger">${data.message.toUpperCase()}</p>`);
                 }
             }
         });

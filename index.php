@@ -1,7 +1,14 @@
+<?php
+session_start();
+
+?>
+
+
+
+
+
 <!-- header  -->
 <?php include_once './partials/_header.php'; ?>
-
-
 <!-- navigationn   -->
 <?php include_once './partials/_navbar.php'; ?>
 
@@ -30,7 +37,7 @@
 
 
 <main class="container">
-    <h2 class="text-center">iDev Categories</h2>
+    <h2 class="text-center">iDev Categories <?php echo isset($_SESSION['loggedUserDetail']) ?  $_SESSION['loggedUserDetail']['firstname']   : '' ; ?> </h2>
 
     
     <div class="row">

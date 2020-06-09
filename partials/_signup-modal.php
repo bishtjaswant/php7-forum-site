@@ -2,12 +2,10 @@
 <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sign up for an iDev coding forum </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+      
+        <p class="alert alert-success" style="display: inline-block;border: none;">
+                    Sign up for an iDev coding forum   </p>
+
             <div class="modal-body">
                 <form method="post" id="sign-form">
                     <div class="row">

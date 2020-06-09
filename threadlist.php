@@ -119,8 +119,9 @@ $showAlert=true;
         <div class="media  px-5">
           <img src="assets/img/defaultuser.png" style="object-fit: cover;width: 55px" class="mr-3 img-fruid" alt="...">
           <div class="media-body">
-            <h5  class="mt-0 pt-2">
-              <a data-toggle="tooltip" data-placement="bottom" title="know more about  <?= $row['thread_title']; ?>"  href="thread.php?thread_id=<?= $row['thread_id']; ?>" class="text-gray">   <?= $row['thread_title']; ?>  </a> </h5>
+            <span  class="mt-0 pt-2 " style="font-size: 2rem;">
+              <a data-toggle="tooltip" data-placement="bottom" title="know more about  <?= $row['thread_title']; ?>"  href="thread.php?thread_id=<?= $row['thread_id']; ?>" class="text-gray">   <?= $row['thread_title']; ?>  </a> </span> <span class="text-secondary">postd at <?= $row['thread_timestamp']?> </span>
+              <br> 
             <strong>jz user</strong>
             <p class="lead"> <?= substr( $row['thread_description'], 0, 190) ?>... <a href="thread.php?thread_id=<?= $row['thread_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="read full description of <?= $row['thread_title']; ?>  " >Read more </a> </p>
           </div>
