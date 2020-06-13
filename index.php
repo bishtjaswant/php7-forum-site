@@ -1,8 +1,5 @@
-<?php
-session_start();
-
-?>
-
+<!-- reqired databas connections -->
+<?php require_once './db/db.php';    ?>
 
 
 
@@ -11,6 +8,20 @@ session_start();
 <?php include_once './partials/_header.php'; ?>
 <!-- navigationn   -->
 <?php include_once './partials/_navbar.php'; ?>
+
+
+
+
+<?php if(  isset ($_SESSION['loggedoutsuccessfully'])  ): ?>
+    
+<div class="alert alert-warning alert-dismissible fade my-0 show" role="alert">
+  <strong>Logged out!</strong> you have  logged out now <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button> 
+  <?php unset($_SESSION['loggedoutsuccessfully']);?>
+</div>
+<?php endif;?>
+
 
 <!-- carousel  -->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -37,35 +48,42 @@ session_start();
 
 
 <main class="container">
-    <h2 class="text-center">iDev Categories <?php echo isset($_SESSION['loggedUserDetail']) ?  $_SESSION['loggedUserDetail']['firstname']   : '' ; ?> </h2>
+    <h2 class="text-center">iDev Categories  </h2>
 
     
+
+
+
+
+
+
     <div class="row">
-    
-    
-    <?php
- require_once './db/db.php';    
-    $sql='SELECT * FROM `categories` order by `category_id` desc';
-       $stmt=$pdo->prepare($sql);;
-       if (is_object($stmt)) {
-           $stmt->execute();
-           $rows= $stmt->fetchAll(); } 
-?>
 
-<?php foreach($rows as $row): ?>
-    <div class="col-md-4">
-            <div class="card mb-5" style="width: 18rem;">
-                <img src="https://source.unsplash.com/500x400/?<?=$row['category_title'];?>" class="card-img-top" alt="<?=$row['category_title'];?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?=$row['category_title'];?></h5>
-                    <p class="card-text"><?=substr($row['category_description'], 0,100);?></p>
-                    <a href="threadlist.php?category_id=<?=$row['category_id'];?>" class="btn btn-outline-info">View threads</a>
+
+        <?php
+
+        $sql = 'SELECT * FROM `categories` order by `category_id` desc';
+        $stmt = $pdo->prepare($sql);;
+        if (is_object($stmt)) {
+            $stmt->execute();
+            $rows = $stmt->fetchAll();
+        }
+        ?>
+
+        <?php foreach ($rows as $row) : ?>
+            <div class="col-md-4">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img src="https://source.unsplash.com/500x400/?<?= $row['category_title']; ?>" class="card-img-top" alt="<?= $row['category_title']; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $row['category_title']; ?></h5>
+                        <p class="card-text"><?= substr($row['category_description'], 0, 100); ?></p>
+                        <a href="threadlist.php?category_id=<?= $row['category_id']; ?>" class="btn btn-outline-info">View threads</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-<?php endforeach; ?>
-        
+        <?php endforeach; ?>
+
 
 
     </div>
@@ -83,4 +101,3 @@ session_start();
 <?php include_once  './partials/_login-modal.php'  ?>
 <!-- signup modal  -->
 <?php include_once  './partials/_signup-modal.php'  ?>
-

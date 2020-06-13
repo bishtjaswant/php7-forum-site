@@ -65,7 +65,7 @@
                         <div class="row">
                             <div class="col-md-12 mx-4 my-3">
                                 <button type="submit" class="btn btn-outline-primary">Create</button>
-                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-secondary" id="account_dismiss_btn" data-dismiss="modal">Close</button>
 
                             </div>
                         </div>

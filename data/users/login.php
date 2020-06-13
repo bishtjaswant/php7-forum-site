@@ -1,8 +1,7 @@
 <?php
-session_start();
-
-
 require_once '../../db/db.php';
+
+
 require_once '../utility/emailAvailability.php';
 
 
@@ -22,6 +21,7 @@ if (!empty($_POST['email'])   &&  !empty($_POST['password']) ) {
             'firstname'=>$row['firstname'],
             'email'=>$row['email'],
             'user_id'=>$row['id'],
+            'loggedIn'=>true
         ];
         echo json_encode(['status' => true, 'message' => 'logged in']);
         

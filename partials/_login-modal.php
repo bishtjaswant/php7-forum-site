@@ -20,7 +20,10 @@
             <label for="password">Password</label>
             <input type="password" id="login_password" required placeholder="***************" class="form-control" id="password">
           </div>
-
+          <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" id="rememberme" for="exampleCheck1">Remember me ?</label>
+  </div>
           <button type="submit" class="btn btn-outline-primary">Login</button>
           <button type="button" id="login_dismiss" class="btn btn-secondary" data-dismiss="modal">Close</button>
 

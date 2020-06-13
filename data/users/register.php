@@ -20,7 +20,7 @@ if (emailAvailability($pdo, $data['email']) === -1) {
     $stmt->execute($data);
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['status' => true, 'msg' => 'account created']);
+        echo json_encode(['status' => true, 'msg' => "hi  {$data['first']} Your accunt created on <strong>iDEV</strong> Codding form you can login now"]);
     } else {
         echo json_encode(['status' => false, 'msg' => 'account creation failed']);
     }

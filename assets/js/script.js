@@ -35,12 +35,16 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data.msg);
-                if (data.status) {
-                    $("#modal-footer").html(`<hr/><p class="text-success text-left">${data.msg.toUpperCase()}</p>`);
+                if (data.status==true) {
+                    $("#modal-footer").html(`<hr/><p class="alert alert-info text-left">${data.msg.toUpperCase()}</p>`);
                     $("#sign-form")[0].reset();
                     setTimeout(() => {
                         $("#modal-footer").html('');
-                    }, 2000);
+                        // close signup madal as logged in 
+
+                    $("#account_dismiss_btn").click()
+
+                    }, 6000);
                 } else {
                     $("#modal-footer").html(`<span class="text-danger">${data.msg}</>`);
                 }
@@ -66,7 +70,6 @@ $(function () {
             cache: false,
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 if (data.status==true) {
                         // close login madal as logged in 
                     $("#login_dismiss").click();
@@ -79,8 +82,7 @@ $(function () {
                     }, 2000);
 
                     // redirection after logged in 
-                    window.location.assign('http://localhost/php-online-forum-project/index.php');
-
+                    window.location.assign(document.URL);
                 } else {
                     $("#login-modal-footer").html(`<p class="alert alert-danger">${data.message.toUpperCase()}</p>`);
                 }

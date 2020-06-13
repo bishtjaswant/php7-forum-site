@@ -1,3 +1,10 @@
+<!-- reqired databas connections -->
+<?php  require_once './db/db.php';    ?>
+
+
+
+
+
 <!-- header  -->
 <?php include_once './partials/_header.php'; ?>
 
@@ -6,8 +13,6 @@
 <?php include_once './partials/_navbar.php'; ?>
 
 
-<!-- reqired databas connections -->
-<?php  require_once './db/db.php';    ?>
 
 
 <!-- POST New question -->
