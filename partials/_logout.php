@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$_SESSION['loggedUserDetail'] = [];
+$_SESSION['loggedUserDetail'] = [];  
 
 unset( $_SESSION['loggedUserDetail'] );
 

@@ -1,5 +1,5 @@
 <!-- reqired databas connections -->
-<?php  require_once './db/db.php';    ?>
+<?php require_once './db/db.php';    ?>
 
 
 <!-- header  -->
@@ -10,7 +10,7 @@
 <?php include_once './partials/_navbar.php'; ?>
 
 
- 
+
 
 <!-- update user's comment -->
 <?php
@@ -20,39 +20,39 @@
 $sql = "UPDATE `comments` SET `comment_title`=:comment_title WHERE `comments`.`comment_id`=:comment_id ";
 
 $pdo->prepare($sql)->execute([
-  ':comment_title'=>@$_POST['new_comment'],
-  ':comment_id'=> @$_POST['comment_id'] 
+  ':comment_title' => @$_POST['new_comment'],
+  ':comment_id' => @$_POST['comment_id']
 ]);
 ?>
 
 <!-- POST New commnts-->
-<?php 
-$showAlert=false;
-if($_SERVER['REQUEST_METHOD']==='POST'){
+<?php
+$showAlert = false;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$sql = "INSERT INTO `comments` ( `comment_title`, `comment_thread_id`, `comment_user_id`)
+  $sql = "INSERT INTO `comments` ( `comment_title`, `comment_thread_id`, `comment_user_id`)
  VALUES (:comment_title, :comment_thread_id, :comment_user_id  ) ";
 
-$pdo->prepare($sql)->execute([
-  ':comment_title'=>$_POST['comment_title'],
-  ':comment_thread_id'=> $_GET['thread_id'] ,
-  ':comment_user_id'=>0,
-]);
-$showAlert=true;
+  $pdo->prepare($sql)->execute([
+    ':comment_title' => $_POST['comment_title'],
+    ':comment_thread_id' => $_GET['thread_id'],
+    ':comment_user_id' => 0,
+  ]);
+  $showAlert = true;
 }
 ?>
 
 
 
 <!-- shhow alert message when comment will  be possted to db -->
-<?php if($showAlert):?>
+<?php if ($showAlert) : ?>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>DONE!</strong>  Comment posted
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php endif;?>
+    <strong>DONE!</strong> Comment posted
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<?php endif; ?>
 
 <main class="container">
   <div class="jumbotron">
@@ -76,6 +76,15 @@ $showAlert=true;
 
 <section class="container">
 
+<?php if( !isset($_SESSION['loggedUserDetail']) || $_SESSION['loggedUserDetail']['loggedIn'] ===0)  :?>
+
+  <h1 class="py-2"> Post a comment</h1>
+  <p class="lead text-secondary" >
+    you are not able to post a comments
+  </p>
+
+  <?php else: ?>
+
   <div class="card">
     <div class="card-header">
       <div class="card-title">
@@ -91,7 +100,11 @@ $showAlert=true;
         <input type="submit" value="post comment" class="btn btn-outline-primary">
       </form>
     </div>
-  </div>
+  </div> 
+
+<?php endif?>
+
+
 
   <h1 class="text-capitalize my-5 px-2">Comments</h1>
 
@@ -126,7 +139,7 @@ $showAlert=true;
           <img src="assets/img/defaultuser.png" style="width: 64px;height: 64px;object-fit: cover;" class="mr-3 img-fruid" alt="...">
           <div class="media-body">
             <p class="font-weight-bold  py-0 my-0">Anonymous</p>
-            <p style="display: inline-block;" id="comment_again" data-toggle="tooltip" data-placement="top" title="want to edit commets" data-commentid="<?= $comment['comment_id']; ?> "> <?= $comment['comment_title']; ?>     </p>
+            <p style="display: inline-block;" id="comment_again" data-toggle="tooltip" data-placement="top" title="want to edit commets" data-commentid="<?= $comment['comment_id']; ?> "> <?= $comment['comment_title']; ?> </p>
           </div>
         </li>
       </ul>

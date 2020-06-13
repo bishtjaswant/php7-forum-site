@@ -1,18 +1,12 @@
 <!-- reqired databas connections -->
 <?php  require_once './db/db.php';    ?>
 
-
-
-
-
-<!-- header  -->
+<!-- -- header  --> 
 <?php include_once './partials/_header.php'; ?>
 
 
 <!-- navigationn   -->
 <?php include_once './partials/_navbar.php'; ?>
-
-
 
 
 <!-- POST New question -->
@@ -70,8 +64,23 @@ $showAlert=true;
 
 <div class="container">
 
+
+<?php 
+
+
+
+  if( ! isset($_SESSION['loggedUserDetail']) || $_SESSION['loggedUserDetail']['loggedIn'] ===0):?>
+
+  <h1>Start discussion</h1>
+  <p class="lead text-secondary" >
+    you can not start discussion at idev coding form . to start discussion  you have to login first
+  </p>
+
+
+  <?php else:?>
+
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Have you any question regarding to <?= $category_row["category_title"]; ?>
+ hi <?=   $_SESSION['loggedUserDetail']['firstname']  ?>   Have you any question regarding to <?= $category_row["category_title"]; ?>
   </button>
   <div class="collapse" id="collapseExample">
     <div class="card">
@@ -101,6 +110,8 @@ $showAlert=true;
 
     </div>
   </div>
+
+<?php endif?>
 
 
 </div>
