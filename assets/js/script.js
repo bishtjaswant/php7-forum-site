@@ -67,12 +67,20 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                if (data.status) {
+                if (data.status==true) {
+                        // close login madal as logged in 
+                    $("#login_dismiss").click();
+
                     $("#login-modal-footer").html(`<hr/><p class="alert alert-danger">${data.message.toUpperCase()}</p>`);
                     $("#login-frm")[0].reset();
                     setTimeout(() => {
                         $("#login-modal-footer").html('');
+                            
                     }, 2000);
+
+                    // redirection after logged in 
+                    window.location.assign('http://localhost/php-online-forum-project/index.php');
+
                 } else {
                     $("#login-modal-footer").html(`<p class="alert alert-danger">${data.message.toUpperCase()}</p>`);
                 }

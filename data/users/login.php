@@ -23,10 +23,8 @@ if (!empty($_POST['email'])   &&  !empty($_POST['password']) ) {
             'email'=>$row['email'],
             'user_id'=>$row['id'],
         ];
-        echo "<script>
-        window.location.assign('http://localhost/php-online-forum-project/index.php');
-        </script>";
-
+        echo json_encode(['status' => true, 'message' => 'logged in']);
+        
         } else {
             echo json_encode(['status' => false, 'message' => 'Invalid password']);
         }

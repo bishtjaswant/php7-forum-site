@@ -22,7 +22,7 @@
           </div>
 
           <button type="submit" class="btn btn-outline-primary">Login</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="login_dismiss" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
         </form>
       </div>
