@@ -48,17 +48,10 @@
 
 
 <main class="container">
-    <h2 class="text-center">iDev Categories  </h2>
+    <h2 class="text-center">iDev's Top Categories  </h2>
 
     
-
-
-
-
-
-
     <div class="row">
-
 
         <?php
 
@@ -78,7 +71,7 @@
                         <h5 class="card-title"><?= $row['category_title']; ?></h5>
                         <p class="card-text"><?= substr($row['category_description'], 0, 100); ?></p>
                         <a href="threadlist.php?category_id=<?= $row['category_id']; ?>" class="btn btn-outline-info">View threads</a>
-                    </div>
+                     </div>
                 </div>
             </div>
 

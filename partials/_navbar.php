@@ -14,17 +14,30 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
+                    Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+
+                    <?php
+
+                    $sql = 'SELECT * FROM `categories` order by `category_id` desc LIMIT 25';
+                    $stmt = $pdo->prepare($sql);;
+                    if (is_object($stmt)) {
+                        $stmt->execute();
+                        $rows = $stmt->fetchAll();
+                    }
+                    ?>
+
+
+                    <?php foreach ($rows as $row) : ?>
+                        <a class="dropdown-item" href="threadlist.php?category_id=<?= $row['category_id']; ?>"  href="threadlist.php?category_id=<?= $row['category_id']; ?>"><?= $row['category_title'];    ?></a>
+                     <?php endforeach; ?>
+
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
 
-            <p class="text-white font-weight-bolder" style="margin-top: 14px;">  <?= isset($_SESSION['loggedUserDetail']['loggedIn']) ? 'Welcome, ' . $_SESSION['loggedUserDetail']['firstname']   : ''; ?>
+            <p class="text-white font-weight-bolder" style="margin-top: 14px;"> <?= isset($_SESSION['loggedUserDetail']['loggedIn']) ? 'Welcome, ' . $_SESSION['loggedUserDetail']['firstname']   : ''; ?>
             </p>
         </ul>
         <div class="row">
