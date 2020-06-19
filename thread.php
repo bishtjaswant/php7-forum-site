@@ -16,13 +16,14 @@
 <?php
 
 
-
+if ( isset(   $_POST['new_comment']  )  ) {
 $sql = "UPDATE `comments` SET `comment_title`=:comment_title WHERE `comments`.`comment_id`=:comment_id ";
-
 $pdo->prepare($sql)->execute([
   ':comment_title' => @$_POST['new_comment'],
   ':comment_id' => @$_POST['comment_id']
 ]);
+
+}
 ?>
 
 <!-- POST New commnts-->
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $pdo->prepare($sql)->execute([
     ':comment_title' => $_POST['comment_title'],
     ':comment_thread_id' => $_GET['thread_id'],
-    ':comment_user_id' => 0,
+    ':comment_user_id' => @$_SESSION['loggedUserDetail']['user_id']??0,
   ]);
   $showAlert = true;
 }
@@ -67,9 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     ?>
 
+
+<?php 
+
+ // print user name  WHOSE PPOSTING QUESTION
+ $user_sql="SELECT firstname FROM users WHERE id =:thread_user_id";
+ $stmt2 = $pdo->prepare($user_sql);
+ $stmt2->execute([":thread_user_id" => $thread_row['user_id']]);
+ $user =  $stmt2->fetch();
+?>
     <h1 class="display-4"><?= $thread_row["thread_title"]; ?> </h1>
     <p class="lead"> <?= $thread_row["thread_description"]; ?> </p>
-    <p class="">Questioned by <strong>jaswant</strong></p>
+    <p class="">Questioned by <strong><?= $user['firstname'] ?></strong></p>
+    <p class="">On dated <strong><?= date('D, d M Y H:i:s', strtotime ($thread_row['thread_timestamp'] ) ); ?></strong></p>
   </div>
 </main>
 
@@ -119,7 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($stmt->rowCount() > 0) {
     $noResult = false;
     $comments = $stmt->fetchAll();
-    // print_r($comment[0]['comment_title']);;
   }
   ?>
 
@@ -134,12 +144,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php foreach ($comments as $comment) : ?>
 
+
+      <?php 
+        
+        
+    // print all the comment users
+    $commentator_sql="SELECT  `id`,  `firstname` FROM `users`  WHERE `id`=:commentator_id";
+    $commentator_stmt = $pdo->prepare($commentator_sql);;
+    $commentator_stmt->execute([":commentator_id" => $comment['comment_user_id']]);
+    $commentator_row = $commentator_stmt->fetch();
+    ?>
+
       <ul class="list-unstyled">
         <li class="media">
           <img src="assets/img/defaultuser.png" style="width: 64px;height: 64px;object-fit: cover;" class="mr-3 img-fruid" alt="...">
           <div class="media-body">
-            <p class="font-weight-bold  py-0 my-0">Anonymous</p>
-            <p style="display: inline-block;" id="comment_again" data-toggle="tooltip" data-placement="top" title="want to edit commets" data-commentid="<?= $comment['comment_id']; ?> "> <?= $comment['comment_title']; ?> </p>
+            <p class="font-weight-bold  py-0 my-0"><?=$commentator_row['firstname'];?></p>
+          
+          
+            <!-- use can modify only own comment -->
+            <?php  if ( @$_SESSION['loggedUserDetail']['user_id'] === $comment['comment_user_id'] ):?>
+            <p style="display: inline-block;" id="comment_again" data-toggle="tooltip" data-placement="top" title="want to edit commets" data-commentid="<?= $comment['comment_id']; ?>" > <?= $comment['comment_title']; ?> </p>
+            <?php else: ?>
+              <p style="display: inline-block;"  > <?= $comment['comment_title']; ?> </p>
+         <?php   endif;?>
+            <p class="font-weight-bold  py-0 my-0">        
+            Commented at <?= date('D, d M Y H:i:s', strtotime ($comment['comment_timestamp'] ) ); ?> </p>
           </div>
         </li>
       </ul>

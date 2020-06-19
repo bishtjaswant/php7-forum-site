@@ -18,7 +18,7 @@ $sql = "INSERT INTO `threads`(`thread_title`, `thread_description`, `user_id`, `
 $pdo->prepare($sql)->execute([
   ':thread_title'=>$_POST['thread_title'],
   ':thread_description'=>$_POST['thread_description'],
-  ':user_id'=>0,
+  ':user_id'=>@$_SESSION['loggedUserDetail']['user_id']??0,
   ':category_id'=>$_POST['category_id']
 ]);
 $showAlert=true;
@@ -130,15 +130,24 @@ $showAlert=true;
     if ($stmt->rowCount() > 0) {
       $rows = $stmt->fetchAll();
 
+     
+
       foreach ($rows as $row) {
+
+
+         // select all user namme  WHOSE PPOSTING QUESTION
+      $user_sql="SELECT firstname FROM users WHERE id =:thread_user_id";
+      $stmt2 = $pdo->prepare($user_sql);
+      $stmt2->execute([":thread_user_id" => $row['user_id']]);
+      $users=  $stmt2->fetch();
     ?>
         <div class="media  px-5">
-          <img src="assets/img/defaultuser.png" style="object-fit: cover;width: 55px" class="mr-3 img-fruid" alt="...">
+          <img src="assets/img/defaultuser.png" style="object-fit: cover;width: 55px" class="mr-3 mt-3 img-fruid" alt="...">
           <div class="media-body">
             <span  class="mt-0 pt-2 " style="font-size: 2rem;">
-              <a data-toggle="tooltip" data-placement="bottom" title="know more about  <?= $row['thread_title']; ?>"  href="thread.php?thread_id=<?= $row['thread_id']; ?>" class="text-gray">   <?= $row['thread_title']; ?>  </a> </span> <span class="text-secondary">postd at <?= $row['thread_timestamp']?> </span>
+              <a data-toggle="tooltip" data-placement="bottom" title="know more about  <?= $row['thread_title']; ?>"  href="thread.php?thread_id=<?= $row['thread_id']; ?>" class="text-gray">   <?= $row['thread_title']; ?>  </a> </span> <span class="text-secondary">postd at <?= date('D, d M Y H:i:s', strtotime ($row['thread_timestamp'] ) ); ?> </span>
               <br> 
-            <strong>jz user</strong>
+            <strong>Asked by</strong><span class="text-secondary">    <?= ucfirst( $users['firstname'] );?></span>
             <p class="lead"> <?= substr( $row['thread_description'], 0, 190) ?>... <a href="thread.php?thread_id=<?= $row['thread_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="read full description of <?= $row['thread_title']; ?>  " >Read more </a> </p>
           </div>
         </div>

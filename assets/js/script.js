@@ -92,10 +92,16 @@ $(function () {
 
     });
 
+
+
+
+
+
+
     // comment_again Impleantation
     //  initial Comment  will be applied in case of user  left blank field;
     let initialComment = document.querySelector("#comment_again").textContent;
-    $("#comment_again").on("click blur focus", function (e) {
+    $("#comment_again").on("click dblclick blur focus", function (e) {
         this.contentEditable = true;
         let new_comment = document.querySelector("#comment_again").textContent;
         console.log(new_comment.length);
