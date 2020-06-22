@@ -16,8 +16,8 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 $sql = "INSERT INTO `threads`(`thread_title`, `thread_description`, `user_id`, `category_id`) VALUES (:thread_title, :thread_description, :user_id, :category_id)";
 
 $pdo->prepare($sql)->execute([
-  ':thread_title'=>$_POST['thread_title'],
-  ':thread_description'=>$_POST['thread_description'],
+  ':thread_title'=> trim(  strip_tags(    $_POST['thread_title']  )),
+  ':thread_description'=>trim(  strip_tags(  $_POST['thread_description'] )),
   ':user_id'=>@$_SESSION['loggedUserDetail']['user_id']??0,
   ':category_id'=>$_POST['category_id']
 ]);
@@ -33,7 +33,7 @@ $showAlert=true;
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<?php endif;?>
+<?php endif;?> 
 
 <main class="container">
   <div class="jumbotron">
